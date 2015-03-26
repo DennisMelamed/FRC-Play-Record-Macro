@@ -2,9 +2,13 @@
 These three classes allow FRC teams to record an autonomous program in Teleop Mode, then replay it in Auto.
 
 Here's the process for recording:
+
 	1.start teleop mode
+	
 	2.press whatever button you implement as a record button
+	
 	3. drive your autonomous
+	
 	4. press the record button again to stop recording
 	5. get ready
 	6. disable teleop
