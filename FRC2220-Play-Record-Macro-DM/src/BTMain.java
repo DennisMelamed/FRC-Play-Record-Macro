@@ -48,7 +48,7 @@ public class BTMain
 			//do nothing if there is no file
 		}
 		
-		//if there is a player and you've disabled autnomous, then flush the rest of the values
+		//if there is a player and you've disabled autonomous, then flush the rest of the values
 		//and stop reading the file
 		if(player!= null)
 		{

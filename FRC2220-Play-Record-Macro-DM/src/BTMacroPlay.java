@@ -6,7 +6,8 @@ import java.util.Scanner;
 /*Code outline to implement playing back a macro recorded in BTMacroRecord
 *Be sure to read out of the same file created in BTMacroRecord
 *BEWARE OF: setting your motors in a different order than in BTMacroRecord and changing motor values before
-*time is up. Both issues are dealt with and explained below
+*time is up. Both issues are dealt with and explained below. Also only read/write from/to the motors 
+*you have fully coded for, otherwise your code will cut out for no reason. 
 *In main, the try/catch structure catches any IOExceptions or FileNotFoundExceptions. Necessary to play back
 *the recorded routine during autonomous
 *Dennis Melamed and Melanie (sorta, she slept)

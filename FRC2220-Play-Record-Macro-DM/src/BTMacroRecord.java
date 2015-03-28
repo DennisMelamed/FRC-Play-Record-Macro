@@ -8,6 +8,8 @@ import java.io.IOException;
 *you won't be able to play it back. It records it in "frames" that contain a value for each output 
 * you want to use during teleop
 *BE AWARE: write into the same file as you do in the Play macro
+*BE AWARE: Only write/read the motors/other things that you actually have fully created in 
+*your code. Otherwise you'll lose robot code randomly with no reason
 *In main, the try/catch structure catches any IOExceptions or FileNotFoundExceptions. Necessary to play back
 *the recorded routine during autonomous
 *Dennis Melamed, Melanie Quick
