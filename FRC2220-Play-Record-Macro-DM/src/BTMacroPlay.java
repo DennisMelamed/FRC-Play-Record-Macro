@@ -27,19 +27,19 @@ public class BTMacroPlay {
 	{
 		//create a scanner to read the file created during BTMacroRecord
 		//scanner is able to read out the doubles recorded into recordedAuto.csv (as of 2015)
-		scanner = new Scanner(new File("/home/lvuser/recordedAuto.csv"));
+		scanner = new Scanner(new File(BTMain.autoFile));
 		
-		//let scanner know that the numbers are separated by a comma, as it is a .csv file
-		scanner.useDelimiter(",");
+		//let scanner know that the numbers are separated by a comma or a newline, as it is a .csv file
+		scanner.useDelimiter(",|\\n");
 		
-		//set start time to the current time you begin autonomous
+		//lets set start time to the current time you begin autonomous
 		startTime = System.currentTimeMillis();	
 	}
 	
 	public void play(BTStorage storage)
 	{
 		//if recordedAuto.csv has a double to read next, then read it
-		if (scanner.hasNextDouble())
+		if ((scanner != null) && (scanner.hasNextDouble()))
 		{
 			double t_delta;
 			
@@ -75,6 +75,8 @@ public class BTMacroPlay {
 				storage.robot.getRightForkLeft().setX(scanner.nextDouble());
 				storage.robot.getRightForkRight().setX(scanner.nextDouble());
 				
+				storage.robot.getToteClamp().set(storage.robot.getToteClamp().isExtended());
+				
 				//go to next double
 				onTime = true;
 			}
@@ -88,6 +90,11 @@ public class BTMacroPlay {
 		else
 		{
 			this.end(storage);
+			if (scanner != null) 
+			{
+				scanner.close();
+				scanner = null;
+			}
 		}
 		
 	}
@@ -107,8 +114,14 @@ public class BTMacroPlay {
 		storage.robot.getLeftForkRight().setX(0);
 		storage.robot.getRightForkLeft().setX(0);
 		storage.robot.getRightForkRight().setX(0);
+		//all this mess of a method does is keep the piston in the same state it ended in
+		//if you want it to return to a specific point at the end of auto, change that here
+		storage.robot.getToteClamp().set(storage.robot.getToteClamp().isExtended());
 		
-		scanner.close();
+		if (scanner != null)
+		{
+			scanner.close();
+		}
 		
 	}
 	
