@@ -31,12 +31,14 @@ public class BTMacroRecord {
 			
 			//put the filesystem location you are supposed to write to as a string 
 			//as the argument in this method, as of 2015 it is /home/lvuser/recordedAuto.csv
-			writer = new FileWriter("/home/lvuser/recordedAuto.csv");
+			writer = new FileWriter(BTMain.autoFile);
 	}
 	
 
 	public void record(BTStorage storage) throws IOException
 	{
+		if(writer != null)
+		{
 		//start each "frame" with the elapsed time since we started recording
 		writer.append("" + (System.currentTimeMillis()-startTime));
 		
@@ -57,14 +59,30 @@ public class BTMacroRecord {
 		writer.append("," + storage.robot.getLeftForkLeft().get());
 		writer.append("," + storage.robot.getLeftForkRight().get());
 		writer.append("," + storage.robot.getRightForkLeft().get());
-		writer.append("," + storage.robot.getRightForkRight().get() + ",");
+		writer.append("," + storage.robot.getRightForkRight().get());
+		/*
+		 * THE LAST ENTRY OF THINGS YOU RECORD NEEDS TO HAVE A DELIMITER CONCATENATED TO 
+		 * THE STRING AT THE END. OTHERWISE GIVES NOSUCHELEMENTEXCEPTION
+		 */ 
+		
+		//this records a true/false value from a piston
+		writer.append("," + storage.robot.getToteClamp().isExtended() + "\n");
+		
+		/*
+		 * CAREFUL. KEEP THE LAST THING YOU RECORD BETWEEN THESE TWO COMMENTS AS A
+		 * REMINDER TO APPEND THE DELIMITER
+		 */
+		}
 	}
 	
 	
 	//this method closes the writer and makes sure that all the data you recorded makes it into the file
 	public void end() throws IOException
 	{
+		if(writer !=null)
+		{
 		writer.flush();
 		writer.close();
+		}
 	}
 }

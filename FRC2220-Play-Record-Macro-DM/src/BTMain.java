@@ -8,6 +8,12 @@ import java.io.IOException;
 public class BTMain 
 {
 	boolean isRecording = false;
+	//autoNumber defines an easy way to change the file you are recording to/playing from, in case you want to make a
+	//few different auto programs
+	static final int autoNumber = 10;
+	//autoFile is a global constant that keeps you from recording into a different file than the one you play from
+	static final String autoFile = new String("/home/lvuser/recordedAuto" + autoNumber + ".csv");
+	
     public BTMain()
     {
     }
@@ -29,8 +35,8 @@ public class BTMain
     	{
     		 player = new BTMacroPlay();
 		} 
+    	
 		//if not, print out an error
-    	//a safety routine required by our IDE, eclipse
 		catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
@@ -93,6 +99,7 @@ public class BTMain
 				}
 				catch (IOException e) 
 				{
+					e.printStackTrace();
 				}
 			}
 		}
