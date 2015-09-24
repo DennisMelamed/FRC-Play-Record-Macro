@@ -1,7 +1,7 @@
 # FRC-Play-Record-Macro
 These three classes allow FRC teams to record an autonomous program in Teleop Mode, then replay it in Auto.
 
-Based on what team 4009 set up in Python (look for the play and record macro files):
+Loosely based on what team 4009 set up in Python (look for the play and record macro files):
 https://github.com/DenfeldRobotics4009/2015_Lopez_Jr/tree/master/commands
 
 Here's the process for recording:
